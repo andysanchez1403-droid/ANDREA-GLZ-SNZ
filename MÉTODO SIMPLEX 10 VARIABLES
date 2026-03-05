@@ -1,0 +1,292 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMNUJjxkOAjE8TqdYi0/tV1",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/andysanchez1403-droid/ANDREA-GLZ-SNZ/blob/main/M%C3%89TODO%20SIMPLEX%2010%20VARIABLES\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "#**MÉTODO SIMPLEX CON EJEMPLO DE 10 VARIABLES**"
+      ],
+      "metadata": {
+        "id": "4IW6bkksFBuz"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Para hacer uso del MÉTODO SIMPLEX lo haremos con un ejemplo de 10 variables."
+      ],
+      "metadata": {
+        "id": "He6SdIx-FE0v"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Sea\n",
+        "\n",
+        "Z= $5X_1+3X_2+6X_3+4X_4+7X_5+2X_6+8X_7+3X_8+4X_9+5X_10$"
+      ],
+      "metadata": {
+        "id": "QeyVkYUFGTV7"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Entonces tenemos:"
+      ],
+      "metadata": {
+        "id": "VkmcvMP9Gr_l"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from scipy.optimize import linprog\n",
+        "\n",
+        "# Coeficientes de la función objetivo\n",
+        "# Z = 5x1 + 3x2 + 6x3 + 4x4 + 7x5 + 2x6 + 8x7 + 3x8 + 4x9 + 5x10\n",
+        "# linprog minimiza, por eso se ponen negativos\n",
+        "c = [-5, -3, -6, -4, -7, -2, -8, -3, -4, -5]\n",
+        "\n",
+        "# Matriz de restricciones\n",
+        "A = [\n",
+        "    [2, 1, 3, 1, 2, 1, 2, 1, 1, 1],\n",
+        "    [1, 2, 1, 2, 1, 3, 1, 2, 1, 1],\n",
+        "    [3, 1, 2, 1, 3, 1, 2, 1, 2, 1]\n",
+        "]\n",
+        "\n",
+        "print(\"Matriz A:\")\n",
+        "for fila in A:\n",
+        "    print(fila)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "96HKAHqMGv55",
+        "outputId": "04b4387b-6b77-4ea1-9dd9-48de89b4243c"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Matriz A:\n",
+            "[2, 1, 3, 1, 2, 1, 2, 1, 1, 1]\n",
+            "[1, 2, 1, 2, 1, 3, 1, 2, 1, 1]\n",
+            "[3, 1, 2, 1, 3, 1, 2, 1, 2, 1]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Matriz A:\")\n",
+        "print(A)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "5MrKgmMfG8OU",
+        "outputId": "cf2bf912-f498-45f6-bbac-d971aaecafd0"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Matriz A:\n",
+            "[[2, 1, 3, 1, 2, 1, 2, 1, 1, 1], [1, 2, 1, 2, 1, 3, 1, 2, 1, 1], [3, 1, 2, 1, 3, 1, 2, 1, 2, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Sacamos su función objetivo:\n",
+        "\n",
+        "print(\"Función objetivo:\", c)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "_awLqjEQICuk",
+        "outputId": "f67826da-51c3-4114-cdf9-5bb5226f6676"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Función objetivo: [-5, -3, -6, -4, -7, -2, -8, -3, -4, -5]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Valores del lado derecho\n",
+        "b = [50,40,60,45]\n"
+      ],
+      "metadata": {
+        "id": "KnTPXSabG3yg"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"b:\")\n",
+        "print(b)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jGiFo8NwHej9",
+        "outputId": "704f6b78-707a-425b-d3f1-b1c64b8f5616"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "b:\n",
+            "[50, 40, 60, 45]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Límites de variables (todas >=0)\n",
+        "x_bounds = [(0, None)]*10\n"
+      ],
+      "metadata": {
+        "id": "0HZjh5r8HnG5"
+      },
+      "execution_count": 9,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Resolvemos el ejercicio:"
+      ],
+      "metadata": {
+        "id": "M5QXTDvlHo-m"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Resolver\n",
+        "resultado = linprog(c, A_ub=A, b_ub=b, bounds=x_bounds, method='highs')\n",
+        "\n",
+        "# Mostrar resultados\n",
+        "print(\"Solución óptima:\")\n",
+        "for i, val in enumerate(resultado.x):\n",
+        "    print(f\"x{i+1} =\", val)\n",
+        "\n",
+        "print(\"Valor máximo de Z =\", -resultado.fun)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hVHGIETUHuUv",
+        "outputId": "a69c6145-185f-49d5-d860-6933d9c7fb9c"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Solución óptima:\n",
+            "x1 = 0.0\n",
+            "x2 = 0.0\n",
+            "x3 = 0.0\n",
+            "x4 = 0.0\n",
+            "x5 = 0.0\n",
+            "x6 = 0.0\n",
+            "x7 = 10.0\n",
+            "x8 = 0.0\n",
+            "x9 = 0.0\n",
+            "x10 = 30.0\n",
+            "Valor máximo de Z = 230.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Concluimos que la mayoría de las variables su resultado 0, lo que algunas son libres a excepción de las que tenemos su resultado."
+      ],
+      "metadata": {
+        "id": "DDetxbNEKhXW"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(\"Valor óptimo de Z =\", -resultado.fun)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "xiUjsz0TK9ai",
+        "outputId": "489c76fc-5ef7-4c5f-b7ec-8f1a37814270"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Valor óptimo de Z = 230.0\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
